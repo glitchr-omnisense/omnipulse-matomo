@@ -1,6 +1,6 @@
-# omnireach/matomo
+# omnipulse/matomo
 
-Matomo for [omnisense/omnireach](https://github.com/glitchr-omnisense/omnireach): visits,
+Matomo for [omnisense/omnipulse](https://github.com/glitchr-omnisense/omnipulse): visits,
 visitors, pageviews, bounce rate and visit length of a site, by entry page, page, referrer,
 country, device or day, through Matomo's Reporting API
 (<https://developer.matomo.org/api-reference/reporting-api>) - a self-hosted Matomo or Matomo
@@ -22,10 +22,10 @@ site 1) answers without a token. No PHP client of the Reporting API was found to
 ## Installation
 
 ```sh
-composer require omnireach/matomo symfony/http-client
+composer require omnipulse/matomo symfony/http-client
 ```
 
-Requires PHP 8.2, `omnisense/omnireach` (1.x) and `symfony/http-client-contracts` (3).
+Requires PHP 8.2, `omnisense/omnipulse` (1.x) and `symfony/http-client-contracts` (3).
 
 ## Credentials
 
@@ -106,7 +106,7 @@ Metrics, for the whole site and by page (prefix none) or by entry page (prefix `
 | visit duration | `<prefix>sum_visit_length` over the visits, in seconds rounded to 1; else `avg_time_on_site` |
 
 A metric Matomo does not give for a row is left out of it. Rows keep Matomo's order (the demo's
-entry pages did not come by visits: [the core's installation page](https://github.com/glitchr-omnisense/omnireach/blob/1.x/docs/installation.md#a-providers-api));
+entry pages did not come by visits: [the core's installation page](https://github.com/glitchr-omnisense/omnipulse/blob/1.x/docs/installation.md#a-providers-api));
 the query's filters and limit are then applied.
 
 **Note.** When visitors are counted over a range (not by day), `Report::$note` is `Matomo gives
@@ -133,11 +133,11 @@ Run live against Matomo's public demo on 2026-10-26 (14:49 UTC), in the core's h
 
 require __DIR__.'/vendor/autoload.php';
 
-use Omnireach\Matomo\MatomoFactory;
-use Omnireach\Model\Dimension;
-use Omnireach\Model\Metric;
-use Omnireach\Model\ReachQuery;
-use Omnireach\Registry;
+use Omnipulse\Matomo\MatomoFactory;
+use Omnipulse\Model\Dimension;
+use Omnipulse\Model\Metric;
+use Omnipulse\Model\ReachQuery;
+use Omnipulse\Registry;
 use Symfony\Component\HttpClient\HttpClient;
 
 $registry = new Registry([new MatomoFactory(HttpClient::create(['timeout' => 30]))], [
@@ -170,17 +170,17 @@ wearable                  0 visits
 
 (2026-10-19 to 2026-10-25; the run gave three `mobile` rows then - 25867, 976 and 10 visits - which
 the provider sums into one since 2026-10-29, as shown; the whole site and its entry pages over the same week are in the core's
-[installation page](https://github.com/glitchr-omnisense/omnireach/blob/1.x/docs/installation.md#a-providers-api))
+[installation page](https://github.com/glitchr-omnisense/omnipulse/blob/1.x/docs/installation.md#a-providers-api))
 
 With a token, in Symfony:
 
 ```yaml
 services:
-    Omnireach\Matomo\MatomoFactory:
+    Omnipulse\Matomo\MatomoFactory:
         arguments: ['@http_client']
-    Omnireach\Registry:
+    Omnipulse\Registry:
         arguments:
-            $factories: ['@Omnireach\Matomo\MatomoFactory']
+            $factories: ['@Omnipulse\Matomo\MatomoFactory']
             $config:
                 stats: { factory: matomo, options: { url: 'https://stats.example.org', site: '1', token: '%env(MATOMO_TOKEN)%' } }
 ```
@@ -207,7 +207,7 @@ history by country with a device segment (`deviceType==desktop`); what Matomo ca
 refused token; the factory through a `Registry`. `Tests/BareTest.php` loads every class with the
 package's requirements alone.
 
-Verified live: `docker compose run --rm omnireach live` (`Tests/LiveTest.php`) on 2026-10-24 -
+Verified live: `docker compose run --rm omnipulse live` (`Tests/LiveTest.php`) on 2026-10-24 -
 the demo's whole site over a week, then its entry pages day by day; and on 2026-10-26 the reports
 above, which showed the two known defects.
 

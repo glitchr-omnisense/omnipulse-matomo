@@ -1,17 +1,17 @@
 <?php
 
-namespace Omnireach\Matomo\Tests;
+namespace Omnipulse\Matomo\Tests;
 
-use Omnireach\Exception\InvalidKeyException;
-use Omnireach\Exception\NotSupportedException;
-use Omnireach\Matomo\MatomoFactory;
-use Omnireach\Matomo\MatomoProvider;
-use Omnireach\Model\Dimension;
-use Omnireach\Model\Metric;
-use Omnireach\Model\ReachQuery;
-use Omnireach\Model\Row;
-use Omnireach\Registry;
-use Omnireach\Testing\RecordedHttpClient;
+use Omnipulse\Exception\InvalidKeyException;
+use Omnipulse\Exception\NotSupportedException;
+use Omnipulse\Matomo\MatomoFactory;
+use Omnipulse\Matomo\MatomoProvider;
+use Omnipulse\Model\Dimension;
+use Omnipulse\Model\Metric;
+use Omnipulse\Model\ReachQuery;
+use Omnipulse\Model\Row;
+use Omnipulse\Registry;
+use Omnipulse\Testing\RecordedHttpClient;
 use PHPUnit\Framework\TestCase;
 
 /**

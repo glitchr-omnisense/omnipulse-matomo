@@ -1,11 +1,11 @@
 <?php
 
-namespace Omnireach\Matomo;
+namespace Omnipulse\Matomo;
 
-use Omnireach\Config;
-use Omnireach\Exception\InvalidConfigException;
-use Omnireach\ProviderFactory;
-use Omnireach\ProviderInterface;
+use Omnipulse\Config;
+use Omnipulse\Exception\InvalidConfigException;
+use Omnipulse\ProviderFactory;
+use Omnipulse\ProviderInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -25,9 +25,9 @@ final class MatomoFactory extends ProviderFactory
     protected function populate(Config $c): void
     {
         $c->defaults([
-            'omnireach.factory_name' => 'matomo',
-            'omnireach.factory_title' => 'Matomo',
-            'omnireach.required_options' => ['url', 'site'],
+            'omnipulse.factory_name' => 'matomo',
+            'omnipulse.factory_title' => 'Matomo',
+            'omnipulse.required_options' => ['url', 'site'],
             'token' => 'anonymous',
         ]);
     }

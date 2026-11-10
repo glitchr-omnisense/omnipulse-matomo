@@ -1,11 +1,11 @@
 <?php
 
-namespace Omnireach\Matomo\Tests;
+namespace Omnipulse\Matomo\Tests;
 
-use Omnireach\Matomo\MatomoProvider;
-use Omnireach\Model\Dimension;
-use Omnireach\Model\Metric;
-use Omnireach\Model\ReachQuery;
+use Omnipulse\Matomo\MatomoProvider;
+use Omnipulse\Model\Dimension;
+use Omnipulse\Model\Metric;
+use Omnipulse\Model\ReachQuery;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\HttpClient;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpClient\HttpClient;
 /**
  * Matomo's public demo (https://demo.matomo.cloud, site 1, anonymous
  * access): the whole site over a week, then its entry pages day by day -
- * two calls. `docker compose run --rm omnireach live`; never in the
+ * two calls. `docker compose run --rm omnipulse live`; never in the
  * default run.
  */
 #[Group('live')]

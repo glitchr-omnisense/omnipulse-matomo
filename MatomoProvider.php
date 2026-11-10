@@ -1,19 +1,19 @@
 <?php
 
-namespace Omnireach\Matomo;
+namespace Omnipulse\Matomo;
 
-use Omnireach\AudienceInterface;
-use Omnireach\Capabilities;
-use Omnireach\Exception\InvalidKeyException;
-use Omnireach\Exception\NotSupportedException;
-use Omnireach\Exception\ProviderException;
-use Omnireach\Http\JsonApi;
-use Omnireach\Model\Dimension;
-use Omnireach\Model\Metric;
-use Omnireach\Model\ReachQuery;
-use Omnireach\Model\Report;
-use Omnireach\Model\Row;
-use Omnireach\Support\Data;
+use Omnipulse\AudienceInterface;
+use Omnipulse\Capabilities;
+use Omnipulse\Exception\InvalidKeyException;
+use Omnipulse\Exception\NotSupportedException;
+use Omnipulse\Exception\ProviderException;
+use Omnipulse\Http\JsonApi;
+use Omnipulse\Model\Dimension;
+use Omnipulse\Model\Metric;
+use Omnipulse\Model\ReachQuery;
+use Omnipulse\Model\Report;
+use Omnipulse\Model\Row;
+use Omnipulse\Support\Data;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**

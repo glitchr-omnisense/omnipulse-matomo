@@ -1,13 +1,16 @@
-# omnireach/matomo
+# omnipulse/matomo
 
-[omnisense/omnireach](https://github.com/glitchr-omnisense/omnireach)'s Matomo, under any PHP host:
+Formerly `omnireach/matomo` (renamed on 2026-11-10 with its family: `Omnireach\` is now `Omnipulse\`;
+this package replaces the former name).
+
+[omnisense/omnipulse](https://github.com/glitchr-omnisense/omnipulse)'s Matomo, under any PHP host:
 visits, visitors, pageviews, bounce rate and visit length of a site, by entry page, page,
 referrer, country, device or day, through Matomo's Reporting API - a self-hosted Matomo or Matomo
 Cloud.
 
 ```php
-use Omnireach\Matomo\MatomoFactory;
-use Omnireach\Registry;
+use Omnipulse\Matomo\MatomoFactory;
+use Omnipulse\Registry;
 use Symfony\Component\HttpClient\HttpClient;
 
 $registry = new Registry([new MatomoFactory(HttpClient::create())], [
@@ -43,7 +46,7 @@ own PHP package, matomo/matomo-php-tracker, sends tracking hits, which is not th
   with a device segment, the token by POST, what Matomo cannot answer, a refused token - against
   answers recorded from Matomo's public demo on 2026-10-24 (trimmed of unread fields); every class
   loading with the package's requirements alone (`BareTest`).
-- Verified live (`docker compose run --rm omnireach live`, 2026-10-24): demo.matomo.cloud, site 1,
+- Verified live (`docker compose run --rm omnipulse live`, 2026-10-24): demo.matomo.cloud, site 1,
   anonymous - the whole site over the last seven days, then entry pages over two days.
 - Not verified: a self-hosted installation with a token.
 
