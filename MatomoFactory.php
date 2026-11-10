@@ -39,6 +39,7 @@ final class MatomoFactory extends ProviderFactory
             rtrim((string) $c->string('url'), '/'),
             (string) $c->string('site'),
             $c->string('token') ?? 'anonymous',
+            $c->backoff(),
         );
     }
 }

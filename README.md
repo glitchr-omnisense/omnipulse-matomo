@@ -40,6 +40,15 @@ installation processes them, otherwise the sum of each day's (the report's note 
 Cloud's are its plan's. Reuse: no PHP client of the Reporting API was found to reuse (Matomo's
 own PHP package, matomo/matomo-php-tracker, sends tracking hits, which is not this).
 
+## Usage policy
+
+Matomo's usage policy is declared as data in [`policy.json`](policy.json) (omnisense/contracts'
+schema, named in `composer.json`'s `extra.omnisense.policy`), its terms read on
+2026-11-10 (https://developer.matomo.org/api-reference/reporting-api): no rate limit declared: an installation's limits are its own (`rateLimits: null`); rights unknown (the site owner's data); no key required (`anonymous`). omnipulse's registry enforces it - a call over a
+limit is never made, a 429 and its `Retry-After` hold every next call
+(`UsageLimitReachedException`) - and a site may tighten it, never loosen it
+(omnisense/omnipulse's docs/policies.md).
+
 ## Verified, and not
 
 - Verified (the core's harness, PHP 8.4): the whole site, entry pages, a daily history by country

@@ -14,6 +14,9 @@ use Omnipulse\Model\ReachQuery;
 use Omnipulse\Model\Report;
 use Omnipulse\Model\Row;
 use Omnipulse\Support\Data;
+use Omnisense\Contracts\Policy\Backoff;
+use Omnisense\Contracts\Policy\DeclaresUsagePolicyInterface;
+use Omnisense\Contracts\Policy\UsagePolicy;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -24,8 +27,13 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
  * breakdown; period=range over the query's days, or period=day for a
  * history (Dimension::Date).
  */
-final class MatomoProvider implements AudienceInterface
+final class MatomoProvider implements AudienceInterface, DeclaresUsagePolicyInterface
 {
+    /** Matomo's usage policy, as its terms read on the day it says (provenance.verifiedAt). */
+    public const POLICY = __DIR__.'/policy.json';
+
+    private static ?UsagePolicy $policy = null;
+
     /** @var array<string, array{0: string, 1: string}> the report of each dimension, and the prefix of its metrics */
     private const REPORTS = [
         'entry_page' => ['Actions.getEntryPageUrls', 'entry_'],
@@ -48,8 +56,9 @@ final class MatomoProvider implements AudienceInterface
         private readonly string $url,
         private readonly string $site,
         #[\SensitiveParameter] private readonly string $token = 'anonymous',
+        ?Backoff $backoff = null,
     ) {
-        $this->api = new JsonApi($http, 'Matomo');
+        $this->api = new JsonApi($http, 'Matomo', $backoff);
     }
 
     public function getName(): string
@@ -62,6 +71,11 @@ final class MatomoProvider implements AudienceInterface
         return 'Matomo';
     }
 
+    public function usagePolicy(): UsagePolicy
+    {
+        return self::$policy ??= UsagePolicy::fromFile(self::POLICY);
+    }
+
     public function capabilities(): Capabilities
     {
         return new Capabilities(
@@ -71,6 +85,7 @@ final class MatomoProvider implements AudienceInterface
             combined: false,
             terms: ['https://developer.matomo.org/api-reference/reporting-api'],
             limits: ['the installation\'s own: a self-hosted Matomo is as fast as its archiving (reports are archived, browser-triggered or by cron)', 'the token is sent by POST, never in the URL'],
+            policy: $this->usagePolicy(),
         );
     }
 

@@ -1,0 +1,37 @@
+{
+    "$schema": "https://github.com/glitchr-omnisense/contracts/blob/1.x/resources/usage-policy.schema.json",
+    "provider": "matomo",
+    "rateLimits": null,
+    "rights": {
+        "commercial": "unknown",
+        "openSourceRequired": null,
+        "caching": {
+            "permission": "unknown",
+            "maxTtl": null
+        },
+        "storage": "unknown",
+        "redistribution": "unknown",
+        "attribution": {
+            "required": false,
+            "text": null,
+            "url": null,
+            "where": []
+        },
+        "licence": null
+    },
+    "requirements": {
+        "key": false,
+        "userAgent": {
+            "required": false,
+            "pattern": null
+        }
+    },
+    "provenance": {
+        "terms": "https://matomo.org/terms/",
+        "policy": "https://developer.matomo.org/api-reference/reporting-api",
+        "verifiedAt": "2026-11-10",
+        "declaredBy": "maintainer",
+        "contact": null,
+        "notes": "A self-hosted Matomo (or Matomo Cloud) is the site's own: its limits are the installation's (its archiving, its web server), none published by the Reporting API's documentation (read on 2026-11-10): rate limits unknown, rights unknown - the data is the site owner's. A token_auth is optional (\"anonymous\" reads a site whose view access is public), so no key is required; the provider sends it by POST, never in the URL."
+    }
+}

@@ -219,3 +219,12 @@ them (the demo answers 0 for any segment).
 An independent, unofficial client, affiliated with Matomo (InnoCraft) in no way. Whoever runs it
 complies with the installation's terms - a self-hosted Matomo's owner's, Matomo Cloud's plan - and
 the Reporting API's (<https://developer.matomo.org/api-reference/reporting-api>): see the README.
+
+## Usage policy
+
+Matomo's usage policy is declared as data in [`policy.json`](policy.json) (omnisense/contracts'
+schema, named in `composer.json`'s `extra.omnisense.policy`), its terms read on
+2026-11-10 (https://developer.matomo.org/api-reference/reporting-api): no rate limit declared: an installation's limits are its own (`rateLimits: null`); rights unknown (the site owner's data); no key required (`anonymous`). omnipulse's registry enforces it - a call over a
+limit is never made, a 429 and its `Retry-After` hold every next call
+(`UsageLimitReachedException`) - and a site may tighten it, never loosen it
+(omnisense/omnipulse's docs/policies.md).
