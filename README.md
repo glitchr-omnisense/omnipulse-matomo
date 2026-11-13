@@ -8,6 +8,38 @@ visits, visitors, pageviews, bounce rate and visit length of a site, by entry pa
 referrer, country, device or day, through Matomo's Reporting API - a self-hosted Matomo or Matomo
 Cloud.
 
+## Install and a first call
+
+```sh
+composer require omnipulse/matomo
+```
+
+No account for this first call: Matomo's answer is recorded (`Omnipulse\Testing\RecordedHttpClient`
+answers in place of the API), so nothing leaves the process. A real call needs a Matomo instance
+(one's own or Matomo Cloud), the site's id and a token with view access (anonymous only where the
+instance allows it).
+
+```php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
+use Omnipulse\Matomo\MatomoFactory;
+use Omnipulse\Model\{Metric, ReachQuery};
+use Omnipulse\Testing\RecordedHttpClient;
+
+// Matomo's answer, recorded: nothing sent. HttpClient::create() (symfony/http-client) for a real call.
+$http = RecordedHttpClient::routes([
+    'POST /index.php' => '{"nb_visits": 100103, "nb_pageviews": 195851, "bounce_rate": "67%", "avg_time_on_site": 181}',
+]);
+$matomo = (new MatomoFactory($http))->create(['url' => 'https://stats.example.org', 'site' => '1', 'token' => 'recorded']);
+
+$report = $matomo->audience(new ReachQuery(new DateTimeImmutable('2026-10-01'), new DateTimeImmutable('2026-10-07'), [], [Metric::Visits, Metric::Pageviews]));
+echo json_encode($report->rows[0]->metrics, JSON_UNESCAPED_SLASHES), "\n";   // {"visits":100103,"pageviews":195851}
+```
+
+With your credentials, through the family's registry:
+
 ```php
 use Omnipulse\Matomo\MatomoFactory;
 use Omnipulse\Registry;
